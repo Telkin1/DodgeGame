@@ -12,6 +12,8 @@ public class PlayerMovement : MonoBehaviour {
   void Start() {
     cam = Camera.main;
     rb = GetComponent<Rigidbody2D>();
+
+    Physics2D.gravity = new Vector2(0, -1f);
   }
 
   void FixedUpdate() {

@@ -13,16 +13,25 @@ public class ObjectSpawner : MonoBehaviour {
   public Vector2 TopLeftSpawnArea;
   public Vector2 BottomRightSpawnArea;
 
+  private bool isActive;
+
   void Start() {
     if (startActivated) StartSpawning();
+    isActive = startActivated;
   }
 
   public void StartSpawning() {
-    StartCoroutine(SpawnObjects());
+    if (!isActive) {
+      StartCoroutine(SpawnObjects());
+      isActive = true;
+    }
   }
 
   public void StopSpawning() {
-    StopAllCoroutines();
+    if (isActive) {
+      StopAllCoroutines();
+      isActive = false;
+    }
   }
 
   private IEnumerator SpawnObjects() {
