@@ -11,16 +11,20 @@ public class PlayerInteractions : MonoBehaviour {
   public HealthBarUI healthBarUI;
   public ObjectSpawner EnemySpawner;
 
+  public AudioClip PlayerHurtAudio;
+  public AudioClip PickupCoinAudio;
+
+  private AudioSource audioSource;
+
   private int invinciblePeriod = 0;
 
-  void OnTriggerEnter2D(Collider2D collider) {
-    if (collider.tag == "Enemy") {
-      if (invinciblePeriod == 0) {
-        healthBarUI.AddLive(-1);
-        invinciblePeriod = 150;
-        var sr = GetComponent<SpriteRenderer>();
-        sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, sr.color.a - 0.7f);
-      }
+  void Awake() {
+    audioSource = Camera.main.gameObject.GetComponent<AudioSource>();
+  }
+
+  void OnTriggerEnter2D(Collider2D coll) {
+    if (coll.tag == "Enemy") {
+      PlayerHit();
     }
   }
 
@@ -29,23 +33,34 @@ public class PlayerInteractions : MonoBehaviour {
       case "Enemy":
         if (invinciblePeriod == 0) {
           collision.gameObject.GetComponent<FallingObject>()?.Kill();
-          healthBarUI.AddLive(-1);
-          invinciblePeriod = 150;
-          var sr = GetComponent<SpriteRenderer>();
-          sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, sr.color.a - 0.7f);
         }
+        PlayerHit();
         break;
       case "Gold":
+        audioSource.PlayOneShot(PickupCoinAudio);
         collision.gameObject.GetComponent<FallingObject>()?.Kill();
         ScoreManager.instance.AddScore(1);
-        EnemySpawner.spawnRate -= 0.006f;
-        if (EnemySpawner.spawnRate < 0.02) EnemySpawner.spawnRate = 0.02f;
+        GameManager.instance.UpdateDifficulty(1);
         break;
     }
 
     if (collision.gameObject.name.StartsWith("HealthBox")) {
       collision.gameObject.GetComponent<FallingObject>()?.Kill();
       healthBarUI.AddLive(1);
+    }
+  }
+
+  private void PlayerHit() {
+    if (invinciblePeriod == 0) {
+      invinciblePeriod = 150;
+      
+      healthBarUI.AddLive(-1);
+
+      audioSource.PlayOneShot(PlayerHurtAudio);
+      Camera.main.gameObject.GetComponent<ScreenShakeBehaviour>().TriggerShake(0.3f);
+
+      var sr = GetComponent<SpriteRenderer>();
+      sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, sr.color.a - 0.7f);
     }
   }
 

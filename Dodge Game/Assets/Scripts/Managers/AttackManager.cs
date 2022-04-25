@@ -8,7 +8,9 @@ using Random = UnityEngine.Random;
 
 public class AttackManager : MonoBehaviour {
   public static AttackManager instance;
-  
+
+  public int newWaveAt = 3;
+
   public ObjectSpawner FallingEnemySpawner;
   public ObjectSpawner FloatingBombSpawner;
 
@@ -17,6 +19,16 @@ public class AttackManager : MonoBehaviour {
   void Awake() {
     if (AttackManager.instance == null) AttackManager.instance = this;
     else Destroy(this);
+
+    GameManager.instance.OnDifficultyChanged += GameManagerOnDifficultyChanged;
+  }
+
+  private void GameManagerOnDifficultyChanged(float difficulty) {
+    FallingEnemySpawner.spawnRate = 0.4f - (difficulty * 0.006f);
+    if (FallingEnemySpawner.spawnRate < 0.02) FallingEnemySpawner.spawnRate = 0.02f;
+
+    FloatingBombSpawner.spawnRate = 0.4f - (difficulty * 0.006f);
+    if (FloatingBombSpawner.spawnRate < 0.02) FloatingBombSpawner.spawnRate = 0.02f;
   }
 
   void Start() {

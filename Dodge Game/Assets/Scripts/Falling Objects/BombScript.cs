@@ -5,34 +5,45 @@ using UnityEngine;
 
 public class BombScript : FallingObject {
 
+  public AudioClip ExplosionAudio;
+  private AudioSource audioSource;
+
   private CircleCollider2D circleColl;
   private float scale;
   private float timeStep = 0.02f;
 
-  new void OnCollisionEnter2D(Collision2D collision) {
-    base.OnCollisionEnter2D(collision);
-  }
-
   void Start() {
     circleColl = GetComponent<CircleCollider2D>();
     StartCoroutine(HandleSpawning());
+
+    var expArea = transform.GetChild(0);
+    transform.DetachChildren();
+    gameObject.transform.localScale = new Vector3(1, 1) * scale;
+    expArea.SetParent(transform);
+
+    audioSource = Camera.main.gameObject.GetComponent<AudioSource>();
   }
 
   void FixedUpdate() {
+    var expArea = transform.GetChild(0);
+    transform.DetachChildren();
     gameObject.transform.localScale = new Vector3(1, 1) * scale;
+    expArea.SetParent(transform);
   }
 
   private IEnumerator HandleSpawning() {
     circleColl.enabled = false;
     scale = 0f;
     float step = 0.05f;
+    //float step = 0.05f;
 
     while (scale <= 1) {
       scale += step;
       yield return new WaitForSeconds(timeStep * 3);
     }
 
-    StartCoroutine(HandlePulsing());
+    StartCoroutine(HandleExploding());
+    //StartCoroutine(HandlePulsing());
   }
 
   private IEnumerator HandlePulsing() {
@@ -57,10 +68,12 @@ public class BombScript : FallingObject {
   }
 
   private IEnumerator HandleExploding() {
+    circleColl.enabled = true;
     float bigScale = 4f;
     float step = 0.1f;
     scale = 1;
 
+    audioSource.PlayOneShot(ExplosionAudio, 0.6f);
     while (scale <= bigScale) {
       scale += step;
       yield return new WaitForSeconds(timeStep / 4);

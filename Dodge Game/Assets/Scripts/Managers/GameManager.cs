@@ -10,6 +10,9 @@ public class GameManager : MonoBehaviour {
 
   public static event Action<GameState> OnGameStateChanged;
 
+  public event Action<float> OnDifficultyChanged;
+  private float difficulty;
+
   void Awake() {
     if (GameManager.instance == null) GameManager.instance = this;
     else Destroy(this);
@@ -32,6 +35,11 @@ public class GameManager : MonoBehaviour {
     }
 
     OnGameStateChanged?.Invoke(newState);
+  }
+
+  public void UpdateDifficulty(float modifier) {
+    difficulty += modifier;
+    OnDifficultyChanged?.Invoke(difficulty);
   }
 
   public enum GameState {

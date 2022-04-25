@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5228106099663461943}
   - component: {fileID: 2327128248626100779}
   - component: {fileID: -7080885777953210985}
+  - component: {fileID: 3657018583953040150}
   m_Layer: 7
   m_Name: HealthBox
   m_TagString: Untagged
@@ -147,3 +148,17 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &3657018583953040150
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5062564156691822267}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ed4a6463dc919c4cb35a185504f55da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  KillColliderName: 
+  Powerup: {fileID: 8300000, guid: fb7e8220ab47ea241850ff1af9722ae1, type: 3}
