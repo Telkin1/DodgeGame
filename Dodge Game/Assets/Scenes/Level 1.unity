@@ -435,6 +435,7 @@ GameObject:
   - component: {fileID: 570576694}
   - component: {fileID: 570576697}
   - component: {fileID: 570576698}
+  - component: {fileID: 570576699}
   m_Layer: 0
   m_Name: Spawner
   m_TagString: Untagged
@@ -535,6 +536,24 @@ MonoBehaviour:
   randomness: 1
   TopLeftSpawnArea: {x: -7.5, y: 6}
   BottomRightSpawnArea: {x: 7.5, y: 6}
+  StartActivated: 0
+--- !u!114 &570576699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 570576693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff03cf7a95570fd4e99f7895c622beed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObjectPrefab: {fileID: 6378058691257871974, guid: 5a7432cefeee3704083cfa568689a50a, type: 3}
+  spawnRate: 1
+  randomness: 0
+  TopLeftSpawnArea: {x: -7, y: 3}
+  BottomRightSpawnArea: {x: 7, y: -3}
   StartActivated: 0
 --- !u!1 &619957381
 GameObject:
@@ -1294,6 +1313,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FallingEnemySpawner: {fileID: 570576694}
+  FloatingBombSpawner: {fileID: 570576699}
 --- !u!4 &1048510592
 Transform:
   m_ObjectHideFlags: 0

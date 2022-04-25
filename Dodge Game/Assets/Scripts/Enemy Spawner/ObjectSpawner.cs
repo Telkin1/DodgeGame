@@ -48,7 +48,7 @@ public class ObjectSpawner : MonoBehaviour {
 
       if (!isActive) yield break;
       var o = Instantiate(ObjectPrefab, position, Quaternion.Euler(0, 0, Random.Range(0, 360)));
-      o.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, -100));
+      //o.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, -100));
     }
   }
 

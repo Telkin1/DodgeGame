@@ -5,6 +5,10 @@ using UnityEngine;
 public class GoldScript : FallingObject {
   public GameObject ParticleSystemPrefab;
 
+  void Start() {
+    GetComponent<Rigidbody2D>().AddForce(new Vector2(0, -50f));
+  }
+
   new void OnCollisionEnter2D(Collision2D collision) {
     base.OnCollisionEnter2D(collision);
 
