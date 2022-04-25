@@ -34,7 +34,7 @@ public class AttackManager : MonoBehaviour {
   void Start() {
     FallingEnemySpawner.StopSpawning();
     
-    UpdateAttackState(AttackState.FallingNormal);
+    UpdateAttackState((AttackState)Random.Range(0, 2));
   }
 
   public void RandomAttackStage(bool excludeCurrent = true) {

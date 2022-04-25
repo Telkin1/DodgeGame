@@ -12,7 +12,8 @@ public class LevelManager : MonoBehaviour {
   }
 
   public void LoadSceneByName(string name) {
-    SceneManager.LoadScene(SceneManager.GetSceneByName(name).buildIndex);
+    if (name == null) return;
+    SceneManager.LoadScene(name);
   }
 
   public void ReloadCurrentScene() {

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 
 using TMPro;
 
@@ -9,6 +10,7 @@ using UnityEngine;
 public class FinalScore : MonoBehaviour {
 
   public TMP_Text finalScore;
+  public TMP_Text highscore;
 
   private int actualScore;
   private int displayedScore = 0;
@@ -31,8 +33,22 @@ public class FinalScore : MonoBehaviour {
 
   private void HandleGameOver() {
     actualScore = ScoreManager.instance.Score;
-    if (this != null)
-      this.StartCoroutine(this.DisplayFinalScore());
+    if (this != null) {
+      StartCoroutine(DisplayFinalScore());
+
+      int oldHighscore = PlayerPrefs.GetInt("myHighscore", 0);
+      if (actualScore > oldHighscore) PlayerPrefs.SetInt("myHighscore", actualScore);
+
+      highscore.text = "Highscore " + PlayerPrefs.GetInt("myHighscore");
+
+      //if (!Directory.Exists(Application.persistentDataPath + "/myData")) Directory.CreateDirectory(Application.persistentDataPath + "/myData");
+      //if (!File.Exists(Application.persistentDataPath + "/myData/myHighscore.txt")) {
+      //  File.Create(Application.persistentDataPath + "/myData/myHighscore.txt");
+      //  File.WriteAllText(Application.persistentDataPath + "/myData/myHighscore.txt", "0");
+      //}
+
+      //int oldHighscore = Int32.Parse(File.ReadAllText(Application.persistentDataPath + "/myData/myHighscore.txt"));
+    }
   }
 
   private IEnumerator DisplayFinalScore() {
