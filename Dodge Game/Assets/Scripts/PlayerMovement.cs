@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour {
 
   public float speed;
+  public bool activeMovement = true;
 
   private Rigidbody2D rb;
   private Camera cam;
@@ -17,6 +18,8 @@ public class PlayerMovement : MonoBehaviour {
   }
 
   void FixedUpdate() {
+    if (!activeMovement) return;
+
     rb.MovePosition(Vector2.MoveTowards(rb.position, cam.ScreenToWorldPoint(Input.mousePosition), speed * Time.fixedDeltaTime));
   }
 }

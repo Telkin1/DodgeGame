@@ -8,6 +8,7 @@ using UnityEngine;
 public class PlayerInteractions : MonoBehaviour {
 
   public HealthBarUI healthBarUI;
+  public ObjectSpawner EnemySpawner;
 
   void OnCollisionEnter2D(Collision2D collision) {
     switch (collision.gameObject.tag) {
@@ -18,6 +19,8 @@ public class PlayerInteractions : MonoBehaviour {
       case "Gold":
         collision.gameObject.GetComponent<FallingObject>()?.Kill();
         ScoreManager.instance.AddScore(1);
+        EnemySpawner.spawnRate -= 0.006f;
+        if (EnemySpawner.spawnRate < 0.02) EnemySpawner.spawnRate = 0.02f;
         break;
     }
 

@@ -10,7 +10,7 @@ public class ScoreManager : MonoBehaviourExtensions {
   public static ScoreManager instance;
 
   public TMP_Text ScoreText;
-  private int Score;
+  public int Score;
 
   void Awake() {
     if (ScoreManager.instance == null) ScoreManager.instance = this;
