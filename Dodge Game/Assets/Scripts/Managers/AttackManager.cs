@@ -1,8 +1,6 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 using Random = UnityEngine.Random;
 
@@ -15,23 +13,26 @@ public class AttackManager : MonoBehaviour {
   public ObjectSpawner FloatingBombSpawner;
   public LaserSpawner LaserSpawner;
 
+  private int playerDifficulty;
   private AttackState State;
 
   void Awake() {
     if (AttackManager.instance == null) AttackManager.instance = this;
     else Destroy(this);
 
+    playerDifficulty = PlayerPrefs.GetInt("playerDifficulty", 1);
+    playerDifficulty = Mathf.Abs(playerDifficulty - 2);
     GameManager.instance.OnDifficultyChanged += GameManagerOnDifficultyChanged;
   }
 
   private void GameManagerOnDifficultyChanged(float difficulty) {
-    FallingEnemySpawner.spawnRate = 0.4f - (difficulty * 0.006f);
+    FallingEnemySpawner.spawnRate = 0.4f - (difficulty * 0.006f) + playerDifficulty * 0.2f;
     if (FallingEnemySpawner.spawnRate < 0.02) FallingEnemySpawner.spawnRate = 0.02f;
 
-    FloatingBombSpawner.spawnRate = 0.4f - (difficulty * 0.006f);
+    FloatingBombSpawner.spawnRate = 0.4f - (difficulty * 0.006f) + playerDifficulty * 0.2f;
     if (FloatingBombSpawner.spawnRate < 0.02) FloatingBombSpawner.spawnRate = 0.02f;
 
-    LaserSpawner.spawnRate = 2f - (difficulty * 0.006f);
+    LaserSpawner.spawnRate = 2f - (difficulty * 0.006f) + playerDifficulty * 0.2f;
     if (LaserSpawner.spawnRate < 0.02) LaserSpawner.spawnRate = 0.02f;
   }
 

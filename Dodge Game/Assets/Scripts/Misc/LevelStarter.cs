@@ -10,7 +10,7 @@ public class LevelStarter : MonoBehaviour
 
     try {
       Camera.main.gameObject.GetComponent<AudioSource>().volume = PlayerPrefs.GetFloat("audioVolume", 1);
-    } catch {
+    } catch { 
       // ignored
     }
   }

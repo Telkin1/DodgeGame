@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour {
 
   void Start() {
     UpdateGameState(GameState.Playing);
+    UpdateDifficulty(0);
   }
 
   public void UpdateGameState(GameState newState) {
