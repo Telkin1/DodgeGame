@@ -13,6 +13,7 @@ public class AttackManager : MonoBehaviour {
 
   public ObjectSpawner FallingEnemySpawner;
   public ObjectSpawner FloatingBombSpawner;
+  public LaserSpawner LaserSpawner;
 
   private AttackState State;
 
@@ -29,6 +30,9 @@ public class AttackManager : MonoBehaviour {
 
     FloatingBombSpawner.spawnRate = 0.4f - (difficulty * 0.006f);
     if (FloatingBombSpawner.spawnRate < 0.02) FloatingBombSpawner.spawnRate = 0.02f;
+
+    LaserSpawner.spawnRate = 2f - (difficulty * 0.006f);
+    if (LaserSpawner.spawnRate < 0.02) LaserSpawner.spawnRate = 0.02f;
   }
 
   void Start() {
@@ -60,6 +64,7 @@ public class AttackManager : MonoBehaviour {
   private void UpdateAttackState(AttackState newState) {
     FallingEnemySpawner.StopSpawning();
     FloatingBombSpawner.StopSpawning();
+    LaserSpawner.StopSpawning();
 
     State = newState;
 
@@ -69,6 +74,9 @@ public class AttackManager : MonoBehaviour {
         break;
       case AttackState.FloatingBombs:
         HandleFloatingBombState();
+        break;
+      case AttackState.LaserSpawn:
+        HandleLaserSpawn();
         break;
       default:
         throw new ArgumentOutOfRangeException(nameof(newState), newState, null);
@@ -83,8 +91,13 @@ public class AttackManager : MonoBehaviour {
     FallingEnemySpawner.StartSpawning();
   }
 
+  private void HandleLaserSpawn() {
+    LaserSpawner.StartSpawning();
+  }
+
   public enum AttackState {
     FallingNormal,
-    FloatingBombs
+    FloatingBombs,
+    LaserSpawn
   }
 }

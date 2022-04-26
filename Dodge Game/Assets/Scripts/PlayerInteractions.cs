@@ -74,8 +74,9 @@ public class PlayerInteractions : MonoBehaviour {
   }
 
   void Update() {
-    if (Input.GetKey(KeyCode.S)) {
+    if (Input.GetKeyDown(KeyCode.S)) {
       ScoreManager.instance.AddScore(1);
+      GameManager.instance.UpdateDifficulty(1);
     }
   }
 }
