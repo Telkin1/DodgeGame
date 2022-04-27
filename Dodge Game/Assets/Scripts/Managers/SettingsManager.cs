@@ -10,10 +10,12 @@ public class SettingsManager : MonoBehaviour {
 
   public Slider volumeSlider;
   public TMP_Dropdown difficultyDropdown;
+  public TMP_Dropdown controlsDropdown;
 
   void Start() {
-    volumeSlider.value = PlayerPrefs.GetFloat( "audioVolume", 1);
+    volumeSlider.value = PlayerPrefs.GetFloat("audioVolume", 1);
     difficultyDropdown.value = PlayerPrefs.GetInt("playerDifficulty", 1);
+    controlsDropdown.value = PlayerPrefs.GetInt("playerControls", 0);
   }
 
   public void SetVolume() {
@@ -29,5 +31,11 @@ public class SettingsManager : MonoBehaviour {
     int difficulty = difficultyDropdown.value;
 
     PlayerPrefs.SetInt("playerDifficulty", difficulty);
+  }
+
+  public void SetControls() {
+    int controls = controlsDropdown.value;
+
+    PlayerPrefs.SetInt("playerControls", controls);
   }
 }

@@ -571,10 +571,10 @@ GameObject:
   - component: {fileID: 570576695}
   - component: {fileID: 570576696}
   - component: {fileID: 570576694}
-  - component: {fileID: 570576697}
   - component: {fileID: 570576698}
   - component: {fileID: 570576699}
   - component: {fileID: 570576700}
+  - component: {fileID: 570576701}
   m_Layer: 0
   m_Name: Spawner
   m_TagString: Untagged
@@ -632,32 +632,14 @@ EdgeCollider2D:
   m_EdgeRadius: 0
   m_Points:
   - {x: -13, y: 13}
-  - {x: -13, y: -7}
-  - {x: 13, y: -7}
+  - {x: -13, y: -13}
+  - {x: 13, y: -13}
   - {x: 13, y: 13}
   - {x: -13, y: 13}
   m_AdjacentStartPoint: {x: 0, y: 0}
   m_AdjacentEndPoint: {x: 0, y: 0}
   m_UseAdjacentStartPoint: 0
   m_UseAdjacentEndPoint: 0
---- !u!114 &570576697
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 570576693}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff03cf7a95570fd4e99f7895c622beed, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ObjectPrefab: {fileID: 7555672760213278026, guid: 0e849ae7b71d9e849ac3f5f40f811342, type: 3}
-  spawnRate: 1.2
-  randomness: 0.5
-  TopLeftSpawnArea: {x: -7.5, y: 6}
-  BottomRightSpawnArea: {x: 7.5, y: 6}
-  StartActivated: 1
 --- !u!114 &570576698
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -706,10 +688,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bfaa3db1eaac0249b3a56f3cf97f9fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LaserPrefab: {fileID: 7865208644943927329, guid: fec7e90896ff0074a8e693651a8d4984, type: 3}
-  spawnRate: 2
+  LaserPrefab: {fileID: 7865208644943927334, guid: fec7e90896ff0074a8e693651a8d4984, type: 3}
+  spawnRate: 1
   randomness: 0.4
   StartActivated: 0
+--- !u!114 &570576701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 570576693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b740fa89c9de06645bc9ac669c0cc4fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GoldPrefab: {fileID: 7555672760213278026, guid: 0e849ae7b71d9e849ac3f5f40f811342, type: 3}
+  spawnRate: 1.2
+  randomness: 0.5
+  TopLeftSpawnArea: {x: -6.5, y: -2.5}
+  BottomRightSpawnArea: {x: 6.5, y: 2.5}
+  StartActivated: 1
 --- !u!1 &619957381
 GameObject:
   m_ObjectHideFlags: 0
@@ -856,7 +856,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a9758588d176604d877910d3512662d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 200
+  speed: 1
   activeMovement: 1
 --- !u!58 &687543202
 CircleCollider2D:
@@ -2685,6 +2685,37 @@ EdgeCollider2D:
   m_AdjacentEndPoint: {x: 0, y: 0}
   m_UseAdjacentStartPoint: 0
   m_UseAdjacentEndPoint: 0
+--- !u!1 &2025445202
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2025445203}
+  m_Layer: 0
+  m_Name: ----------------
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2025445203
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2025445202}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.40745384, y: -0.81055516, z: -0.0098671485}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 13
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2036599289
 GameObject:
   m_ObjectHideFlags: 0
