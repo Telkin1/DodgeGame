@@ -599,7 +599,7 @@ MonoBehaviour:
   randomness: 0.4
   TopLeftSpawnArea: {x: -7.5, y: 6}
   BottomRightSpawnArea: {x: 7.5, y: 6}
-  StartActivated: 1
+  StartActivated: 0
 --- !u!4 &570576695
 Transform:
   m_ObjectHideFlags: 0
@@ -705,7 +705,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GoldPrefab: {fileID: 7555672760213278026, guid: 0e849ae7b71d9e849ac3f5f40f811342, type: 3}
-  spawnRate: 1.2
+  spawnRate: 0.8
   randomness: 0.5
   TopLeftSpawnArea: {x: -6.5, y: -2.5}
   BottomRightSpawnArea: {x: 6.5, y: 2.5}

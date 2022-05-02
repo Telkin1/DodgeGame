@@ -9,14 +9,14 @@ public class LaserEnemy : MonoBehaviour {
   void Start() {
     transform.localScale = new Vector2(50f, 0f);
     coll = GetComponent<BoxCollider2D>();
-    //coll.enabled = false;
+    coll.enabled = false;
 
     SpawnAtRandom();
     StartCoroutine(EnableCollider());
   }
 
   private IEnumerator EnableCollider() {
-    yield return new WaitForSeconds(0);
+    yield return new WaitForSeconds(0.8f);
     coll.enabled = true;
     yield return new WaitForSeconds(1.5f);
     Destroy(gameObject);

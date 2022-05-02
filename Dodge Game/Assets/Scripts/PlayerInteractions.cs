@@ -8,6 +8,10 @@ using UnityEngine;
 
 public class PlayerInteractions : MonoBehaviour {
 
+  public event Action OnPlayerHit;
+  public event Action OnPlayerHeal;
+  public event Action OnPlayerScoreIncrease;
+
   public HealthBarUI healthBarUI;
   public ObjectSpawner EnemySpawner;
 
@@ -40,13 +44,15 @@ public class PlayerInteractions : MonoBehaviour {
         audioSource.PlayOneShot(PickupCoinAudio);
         collision.gameObject.GetComponent<FallingObject>()?.Kill();
         ScoreManager.instance.AddScore(1);
-        GameManager.instance.UpdateDifficulty(1);
+        GameManager.instance?.UpdateDifficulty(1);
+        OnPlayerScoreIncrease?.Invoke();
         break;
     }
 
     if (collision.gameObject.name.StartsWith("HealthBox")) {
       collision.gameObject.GetComponent<FallingObject>()?.Kill();
       healthBarUI.AddLive(1);
+      OnPlayerHeal?.Invoke();
     }
   }
 
@@ -61,6 +67,7 @@ public class PlayerInteractions : MonoBehaviour {
 
       var sr = GetComponent<SpriteRenderer>();
       sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, sr.color.a - 0.7f);
+      OnPlayerHit?.Invoke();
     }
   }
 
@@ -78,5 +85,9 @@ public class PlayerInteractions : MonoBehaviour {
       ScoreManager.instance.AddScore(1);
       GameManager.instance.UpdateDifficulty(1);
     }
+
+    if (Input.GetKeyDown(KeyCode.B)) AttackManager.instance.UpdateAttackState(AttackManager.AttackState.FallingNormal);
+    if (Input.GetKeyDown(KeyCode.N)) AttackManager.instance.UpdateAttackState(AttackManager.AttackState.FloatingBombs);
+    if (Input.GetKeyDown(KeyCode.M)) AttackManager.instance.UpdateAttackState(AttackManager.AttackState.LaserSpawn);
   }
 }

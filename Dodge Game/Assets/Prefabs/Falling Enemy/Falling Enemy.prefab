@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2393351863897308256}
   - component: {fileID: 2393351863897308257}
   - component: {fileID: 386705068623104149}
+  - component: {fileID: -8124883571491680979}
   m_Layer: 7
   m_Name: Falling Enemy
   m_TagString: Enemy
@@ -147,3 +148,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   KillColliderName: Spawner
+--- !u!95 &-8124883571491680979
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2393351863897308258}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: cb7325673d1cde54ebf08b34da2d18ae, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

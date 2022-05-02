@@ -43,8 +43,8 @@ public class HealthBarUI : MonoBehaviourExtensions {
       PopEffect(hearts[i].gameObject, 1.5f, 0.8f, 0f, 0.1f);
     }
 
-    if (health < hearts.Length) healthBoxSpawner.StartSpawning();
-    else healthBoxSpawner.StopSpawning();
+    if (health < hearts.Length) healthBoxSpawner?.StartSpawning();
+    else healthBoxSpawner?.StopSpawning();
   }
 
   private void PlayerDeath() {
@@ -63,6 +63,6 @@ public class HealthBarUI : MonoBehaviourExtensions {
 
     GameObject.Find("GameWall").GetComponent<EdgeCollider2D>().sharedMaterial = new PhysicsMaterial2D("b_test") {bounciness = 0.75f, friction = 0};
 
-    GameManager.instance.UpdateGameState(GameManager.GameState.GameOver);
+    GameManager.instance?.UpdateGameState(GameManager.GameState.GameOver);
   }
 }

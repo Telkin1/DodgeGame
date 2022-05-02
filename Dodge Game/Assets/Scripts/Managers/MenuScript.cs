@@ -17,7 +17,7 @@ public class MenuScript : MonoBehaviour {
 
     yield return new WaitForSeconds(1f);
 
-    //LevelManager.instance.LoadSceneByName("Level_1");
-    SceneManager.LoadScene(1);
+    LevelManager.instance.LoadSceneByName("Level_1");
+    //SceneManager.LoadScene(1);
   }
 }

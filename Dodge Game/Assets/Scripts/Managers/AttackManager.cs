@@ -32,7 +32,7 @@ public class AttackManager : MonoBehaviour {
     FloatingBombSpawner.spawnRate = 0.4f - (difficulty * 0.006f) + playerDifficulty * 0.2f;
     if (FloatingBombSpawner.spawnRate < 0.02) FloatingBombSpawner.spawnRate = 0.02f;
 
-    LaserSpawner.spawnRate = 2f - (difficulty * 0.006f) + playerDifficulty * 0.2f;
+    LaserSpawner.spawnRate = 1f - (difficulty * 0.006f) + playerDifficulty * 0.2f;
     if (LaserSpawner.spawnRate < 0.02) LaserSpawner.spawnRate = 0.02f;
   }
 
@@ -62,7 +62,7 @@ public class AttackManager : MonoBehaviour {
     UpdateAttackState((AttackState)newState);
   }
 
-  private void UpdateAttackState(AttackState newState) {
+  public void UpdateAttackState(AttackState newState) {
     FallingEnemySpawner.StopSpawning();
     FloatingBombSpawner.StopSpawning();
     LaserSpawner.StopSpawning();
