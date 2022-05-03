@@ -12,8 +12,8 @@ public class GameManager : MonoBehaviour {
 
   public static event Action<GameState> OnGameStateChanged;
 
-  public event Action<float> OnDifficultyChanged;
-  private float difficulty;
+  public event Action<int> OnDifficultyChanged;
+  private int difficulty;
 
   void Awake() {
     if (GameManager.instance == null) GameManager.instance = this;
@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour {
 
   void Start() {
     UpdateGameState(GameState.Playing);
-    UpdateDifficulty(0);
+    difficulty = 0;
   }
 
   public void UpdateGameState(GameState newState) {
@@ -34,15 +34,16 @@ public class GameManager : MonoBehaviour {
       case GameState.GameOver:
         break;
       default:
-        throw new ArgumentOutOfRangeException(nameof(newState), newState, null);
+        Debug.LogError("Unknown GameState " + newState + " in UpdateGameState()");
+        break;
     }
 
     OnGameStateChanged?.Invoke(newState);
   }
 
-  public void UpdateDifficulty(float modifier) {
-    difficulty += modifier;
-    OnDifficultyChanged?.Invoke(difficulty);
+  public void UpdateDifficulty(int steps) {
+    difficulty += steps;
+    OnDifficultyChanged?.Invoke(steps);
   }
 
   public enum GameState {

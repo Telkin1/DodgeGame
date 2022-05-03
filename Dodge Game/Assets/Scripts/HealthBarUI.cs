@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class HealthBarUI : MonoBehaviourExtensions {
 
-  public ObjectSpawner healthBoxSpawner;
+  public EnemySpawner healthBoxSpawner;
   public GameObject gameOverPanel;
 
   public int health;

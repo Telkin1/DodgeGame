@@ -18,7 +18,9 @@ public class LaserEnemy : MonoBehaviour {
   private IEnumerator EnableCollider() {
     yield return new WaitForSeconds(0.8f);
     coll.enabled = true;
-    yield return new WaitForSeconds(1.5f);
+    yield return new WaitForSeconds(0.7f);
+    coll.enabled = false;
+    yield return new WaitForSeconds(1f);
     Destroy(gameObject);
   }
 

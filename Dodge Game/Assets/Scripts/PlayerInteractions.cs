@@ -13,7 +13,7 @@ public class PlayerInteractions : MonoBehaviour {
   public event Action OnPlayerScoreIncrease;
 
   public HealthBarUI healthBarUI;
-  public ObjectSpawner EnemySpawner;
+  public EnemySpawner EnemySpawner;
 
   public AudioClip PlayerHurtAudio;
   public AudioClip PickupCoinAudio;
@@ -89,5 +89,6 @@ public class PlayerInteractions : MonoBehaviour {
     if (Input.GetKeyDown(KeyCode.B)) AttackManager.instance.UpdateAttackState(AttackManager.AttackState.FallingNormal);
     if (Input.GetKeyDown(KeyCode.N)) AttackManager.instance.UpdateAttackState(AttackManager.AttackState.FloatingBombs);
     if (Input.GetKeyDown(KeyCode.M)) AttackManager.instance.UpdateAttackState(AttackManager.AttackState.LaserSpawn);
+    if (Input.GetKeyDown(KeyCode.V)) AttackManager.instance.UpdateAttackState(AttackManager.AttackState.NoneOfEm);
   }
 }

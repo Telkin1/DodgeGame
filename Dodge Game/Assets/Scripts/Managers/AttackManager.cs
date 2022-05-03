@@ -1,3 +1,4 @@
+using Assets.Scripts.Object_Spawners;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -11,7 +12,7 @@ public class AttackManager : MonoBehaviour {
 
   public ObjectSpawner FallingEnemySpawner;
   public ObjectSpawner FloatingBombSpawner;
-  public LaserSpawner LaserSpawner;
+  public ObjectSpawner LaserSpawner;
 
   private int playerDifficulty;
   private AttackState State;
@@ -20,26 +21,18 @@ public class AttackManager : MonoBehaviour {
     if (AttackManager.instance == null) AttackManager.instance = this;
     else Destroy(this);
 
-    playerDifficulty = PlayerPrefs.GetInt("playerDifficulty", 1);
-    playerDifficulty = Mathf.Abs(playerDifficulty - 2);
     GameManager.instance.OnDifficultyChanged += GameManagerOnDifficultyChanged;
   }
 
-  private void GameManagerOnDifficultyChanged(float difficulty) {
-    FallingEnemySpawner.spawnRate = 0.4f - (difficulty * 0.006f) + playerDifficulty * 0.2f;
-    if (FallingEnemySpawner.spawnRate < 0.02) FallingEnemySpawner.spawnRate = 0.02f;
-
-    FloatingBombSpawner.spawnRate = 0.4f - (difficulty * 0.006f) + playerDifficulty * 0.2f;
-    if (FloatingBombSpawner.spawnRate < 0.02) FloatingBombSpawner.spawnRate = 0.02f;
-
-    LaserSpawner.spawnRate = 1f - (difficulty * 0.006f) + playerDifficulty * 0.2f;
-    if (LaserSpawner.spawnRate < 0.02) LaserSpawner.spawnRate = 0.02f;
+  void Start()
+  {
+    UpdateAttackState((AttackState)Random.Range(0, 2));
   }
 
-  void Start() {
-    FallingEnemySpawner.StopSpawning();
-    
-    UpdateAttackState((AttackState)Random.Range(0, 2));
+  private void GameManagerOnDifficultyChanged(int steps) {
+    FallingEnemySpawner.IncreaseDifficulty(steps);
+    FloatingBombSpawner.IncreaseDifficulty(steps);
+    LaserSpawner.IncreaseDifficulty(steps);
   }
 
   public void RandomAttackStage(bool excludeCurrent = true) {
@@ -57,7 +50,7 @@ public class AttackManager : MonoBehaviour {
       newState = Random.Range(0, Enum.GetValues(typeof(AttackState)).Length);
       tries++;
       if (tries >= 5) break;
-    } while (excludeCurrent & newState == currState);
+    } while ((excludeCurrent & newState == currState) || newState == (int)AttackState.NoneOfEm);
 
     UpdateAttackState((AttackState)newState);
   }
@@ -79,9 +72,18 @@ public class AttackManager : MonoBehaviour {
       case AttackState.LaserSpawn:
         HandleLaserSpawn();
         break;
+      case AttackState.NoneOfEm:
+        HandleNoAttackState();
+        break;
       default:
-        throw new ArgumentOutOfRangeException(nameof(newState), newState, null);
+        Debug.LogError("Unknown AttackState in UpdateAttackState()");
+        break;
     }
+  }
+
+  private void HandleNoAttackState()
+  {
+    // Do nothing
   }
 
   private void HandleFloatingBombState() {
@@ -99,6 +101,7 @@ public class AttackManager : MonoBehaviour {
   public enum AttackState {
     FallingNormal,
     FloatingBombs,
-    LaserSpawn
+    LaserSpawn,
+    NoneOfEm
   }
 }
