@@ -83,7 +83,7 @@ public class PlayerInteractions : MonoBehaviour {
   void Update() {
     if (Input.GetKeyDown(KeyCode.S)) {
       ScoreManager.instance.AddScore(1);
-      GameManager.instance.UpdateDifficulty(1);
+      GameManager.instance?.UpdateDifficulty(1);
     }
 
     if (Input.GetKeyDown(KeyCode.B)) AttackManager.instance.UpdateAttackState(AttackManager.AttackState.FallingNormal);

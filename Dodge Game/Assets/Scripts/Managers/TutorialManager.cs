@@ -23,16 +23,13 @@ public class TutorialManager : MonoBehaviour {
 
   private void SpawnHealthBox() {
     var o = Instantiate(HealthPrefab, new Vector3(-4.4f, 1f), Quaternion.identity);
-    o.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
   }
 
   private void SpawnGold() {
     var o = Instantiate(GoldPrefab, new Vector3(-4.4f, -0.8f), Quaternion.identity);
-    o.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
   }
 
   private void SpawnEnemy() {
     var o = Instantiate(EnemyPrefab, new Vector3(-4.4f, -2.8f), Quaternion.identity);
-    o.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
   }
 }
